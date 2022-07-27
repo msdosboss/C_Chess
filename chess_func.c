@@ -7,7 +7,7 @@ int *getmove(){
     int *squarecord;
     int flag = 0;
 
-    squarecord = (int *) malloc(5);
+    squarecord = (int *) malloc(2 * sizeof(int));
 
                                                               
     while(1){
@@ -35,7 +35,7 @@ int *makemove(char c, char d){
     int *squarecord;
     int flag = 0;
     
-    squarecord = (int *) malloc(5);
+    squarecord = (int *) malloc(2 * sizeof(int));
 
     if (c >= 'a' && c <='h'){
         *squarecord++ = (c - 'a');                                              //-1 is and offset for the array since it starts at 0
@@ -52,7 +52,7 @@ int *makemove(char c, char d){
 
 int *inttointpointer(int a, int b){                     //a = row b = collumn
     int *passint;
-    passint = (int *) malloc(5);
+    passint = (int *) malloc(2 * sizeof(int));
 
     *passint = b;
     *(passint + 1) = a;
@@ -71,7 +71,7 @@ void printboard(int board[][8]){
 }
 char *givecords(int *cords){                                //converts from array notation to chess notation
     char *newcords;
-    newcords = (char *) malloc(5);
+    newcords = (char *) malloc(2 * sizeof(int));
 
     *(newcords + 1) = *(cords + 1) + '0' + 1;
     *newcords = *(cords + 1) + '0';
@@ -84,7 +84,7 @@ char *givecords(int *cords){                                //converts from arra
 
 int *limit(int vert,int hor,int board [][8], int *currentsquare, int color){
     int *limit;
-    limit = (int *) malloc(5);
+    limit = (int *) malloc(2 * sizeof(int));
     
     for(int i = 0; *(currentsquare + 1) + (i * vert) <= 7 && *(currentsquare + 1) + (i * vert) >= 0 && *currentsquare + (i * hor) <= 7 && *currentsquare + (i * hor) >= 0; i++){
         *(limit + 1) = *(currentsquare + 1) + (i * vert);
@@ -140,10 +140,10 @@ int isknightcheck(int board[][8], int *square, int *currentsquare){
 
 int isbishopcheck(int board[][8], int *square, int *currentsquare, int color){
     int *upright, *downright, *upleft, *downleft;
-    upright = (int *) malloc(5);
-    downright = (int *) malloc(5);
-    upleft = (int *) malloc(5);
-    downleft = (int *) malloc(5);
+    upright = (int *) malloc(2 * sizeof(int));
+    downright = (int *) malloc(2 * sizeof(int));
+    upleft = (int *) malloc(2 * sizeof(int));
+    downleft = (int *) malloc(2 * sizeof(int));
     //color = (color == 0) ? (1) : (0); // we are seeing if the oppisite color can check here so we have to switch color. Had to comment it all out because it was not accounting for a piece defending another piece of its own color
     
     upright = limit(1, 1, board, currentsquare, color);
@@ -167,10 +167,10 @@ int isbishopcheck(int board[][8], int *square, int *currentsquare, int color){
 
 int isrookcheck(int board[][8], int *square, int *currentsquare, int color){
     int *right, *down, *up, *left;
-    up = (int *) malloc(5);
-    down = (int *) malloc(5);
-    left = (int *) malloc(5);
-    right = (int *) malloc(5);
+    up = (int *) malloc(2 * sizeof(int));
+    down = (int *) malloc(2 * sizeof(int));
+    left = (int *) malloc(2 * sizeof(int));
+    right = (int *) malloc(2 * sizeof(int));
     //color = (color == 0) ? (1) : (0);
 
     up = limit(1, 0, board, currentsquare, color);
@@ -194,15 +194,15 @@ int isrookcheck(int board[][8], int *square, int *currentsquare, int color){
 
 int isqueencheck(int board[][8], int *square, int *currentsquare, int color){
     int *upright, *downright, *upleft, *downleft;
-    upright = (int *) malloc(5);
-    downright = (int *) malloc(5);
-    upleft = (int *) malloc(5);
-    downleft = (int *) malloc(5);
+    upright = (int *) malloc(2 * sizeof(int));
+    downright = (int *) malloc(2 * sizeof(int));
+    upleft = (int *) malloc(2 * sizeof(int));
+    downleft = (int *) malloc(2 * sizeof(int));
     int *right, *down, *up, *left;
-    up = (int *) malloc(5);
-    down = (int *) malloc(5);
-    left = (int *) malloc(5);
-    right = (int *) malloc(5);
+    up = (int *) malloc(2 * sizeof(int));
+    down = (int *) malloc(2 * sizeof(int));
+    left = (int *) malloc(2 * sizeof(int));
+    right = (int *) malloc(2 * sizeof(int));
     //color = (color == 0) ? (1) : (0);
 
     upright = limit(1, 1, board, currentsquare, color);
@@ -248,7 +248,7 @@ int iskingcheck(int board[][8], int *square, int *currentsquare, int color){
 
 int ischeck(int board [][8],int *square, int color){
     int *currentsquare;
-    currentsquare = (int *) malloc(5);
+    currentsquare = (int *) malloc(2 * sizeof(int));
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8;j++){
             *currentsquare = j;
@@ -373,7 +373,7 @@ int pawn(int board[][8],int *currentsquare, int color){
     int *squarecord2;
     printf("current square %d ",*(currentsquare+1));
     printf("%d",*currentsquare);
-    squarecord2 = (int *) malloc(5);
+    squarecord2 = (int *) malloc(2 * sizeof(int));
 
     printf(" where would you like to move your pawn? ");
     squarecord2 = getmove();
@@ -478,7 +478,7 @@ int knight(int board[][8],int *currentsquare,int color){
     int *squarecord2;
     printf("current square %d ",*(currentsquare+1));
     printf("%d",*currentsquare);
-    squarecord2 = (int *) malloc(5);
+    squarecord2 = (int *) malloc(2 * sizeof(int));
 
     printf(" where would you like to move your knight? ");
     squarecord2 = getmove();
@@ -520,11 +520,11 @@ int bishop(int board[][8],int *currentsquare,int color){
     int orca = 0;
     printf("current square %d ",*(currentsquare+1));
     printf("%d",*currentsquare);
-    upright = (int *) malloc(5);
-    downright = (int *) malloc(5);
-    upleft = (int *) malloc(5);
-    downleft = (int *) malloc(5);
-    squarecord2 = (int *) malloc(5);
+    upright = (int *) malloc(2 * sizeof(int));
+    downright = (int *) malloc(2 * sizeof(int));
+    upleft = (int *) malloc(2 * sizeof(int));
+    downleft = (int *) malloc(2 * sizeof(int));
+    squarecord2 = (int *) malloc(2 * sizeof(int));
 
     upright = limit(1, 1, board, currentsquare, color);
     downright = limit(-1, 1, board, currentsquare, color);
@@ -564,11 +564,11 @@ int rook(int board[][8],int *currentsquare,int color){
     int orca = 0;
     printf("current square %d ",*(currentsquare+1));
     printf("%d",*currentsquare);
-    up = (int *) malloc(5);
-    down = (int *) malloc(5);
-    left = (int *) malloc(5);
-    right = (int *) malloc(5);
-    squarecord2 = (int *) malloc(5);
+    up = (int *) malloc(2 * sizeof(int));
+    down = (int *) malloc(2 * sizeof(int));
+    left = (int *) malloc(2 * sizeof(int));
+    right = (int *) malloc(2 * sizeof(int));
+    squarecord2 = (int *) malloc(2 * sizeof(int));
 
     up = limit(1, 0, board, currentsquare, color);
     down = limit(-1, 0, board, currentsquare, color); 
@@ -607,16 +607,16 @@ int queen(int board[][8],int *currentsquare,int color){
     int orca = 0;
     printf("current square %d ",*(currentsquare+1));
     printf("%d",*currentsquare);
-    up = (int *) malloc(5);
-    down = (int *) malloc(5);
-    left = (int *) malloc(5);
-    right = (int *) malloc(5);
-    squarecord2 = (int *) malloc(5);
+    up = (int *) malloc(2 * sizeof(int));
+    down = (int *) malloc(2 * sizeof(int));
+    left = (int *) malloc(2 * sizeof(int));
+    right = (int *) malloc(2 * sizeof(int));
+    squarecord2 = (int *) malloc(2 * sizeof(int));
     int *upright, *downright, *upleft, *downleft;
-    upright = (int *) malloc(5);
-    downright = (int *) malloc(5);
-    upleft = (int *) malloc(5);
-    downleft = (int *) malloc(5);
+    upright = (int *) malloc(2 * sizeof(int));
+    downright = (int *) malloc(2 * sizeof(int));
+    upleft = (int *) malloc(2 * sizeof(int));
+    downleft = (int *) malloc(2 * sizeof(int));
 
     up = limit(1, 0, board, currentsquare, color);
     down = limit(-1, 0, board, currentsquare, color); 
@@ -629,7 +629,7 @@ int queen(int board[][8],int *currentsquare,int color){
 
     
     char *newup;
-    newup = (char *) malloc(5);
+    newup = (char *) malloc(2 * sizeof(int));
     newup = givecords(up);
     printf("\nup %c %c\n",*(newup),*(newup + 1));
     printf("right %d %d\n",*(right + 1),*right);
@@ -682,7 +682,7 @@ int bking = 0;
 int king(int board[][8],int *currentsquare,int color){
     int *squarecord2;
     int orca = 0;
-    squarecord2 = (int *) malloc(5);
+    squarecord2 = (int *) malloc(2 * sizeof(int));
     squarecord2 = getmove();
     if((*squarecord2 == *currentsquare + 1 && *(squarecord2 + 1) == *(currentsquare + 1) + 1) || (*squarecord2 == *currentsquare && *(squarecord2 + 1) == *(currentsquare + 1) + 1) || (*squarecord2 == *currentsquare - 1 && *(squarecord2 + 1) == *(currentsquare + 1) + 1) || (*squarecord2 == *currentsquare - 1 && *(squarecord2 + 1) == *(currentsquare + 1) || (*squarecord2 == *currentsquare + 1 && *(squarecord2 + 1) == *(currentsquare + 1)) || (*squarecord2 == *currentsquare - 1 && *(squarecord2 + 1) == *(currentsquare + 1) - 1) || (*squarecord2 == *currentsquare && *(squarecord2 + 1) == *(currentsquare + 1) - 1) || (*squarecord2 == *currentsquare + 1 && *(squarecord2 + 1) == *(currentsquare + 1) - 1))){
         if(!ischeck(board, squarecord2, color)){
